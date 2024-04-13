@@ -9,6 +9,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
                             data.append(result);
                         }
                     } while (result!=null);
-                    Log.d("MaineActivity", result);
+                    JSONObject jsonObject = new JSONObject(data.toString());
+                    String message = jsonObject.getString("message");
+                    String status = jsonObject.getString("status");
+                    DogImage dogImage = new DogImage(message,status);
+                    Log.d("MaineActivity", dogImage.toString());
                 } catch (Exception e) {
                     Log.d("MainActivity", e.toString());
                 }
